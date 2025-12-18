@@ -1,0 +1,2616 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>भूमि CSC जन सेवा केंद्र | BHUMI CSC JAN SEVA KENDRA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --accent: #06b6d4;
+            --neon-pink: #ec4899;
+            --neon-green: #10b981;
+            --neon-orange: #f59e0b;
+            --neon-blue: #3b82f6;
+            --dark: #0f0f23;
+            --darker: #070714;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif;
+            background: var(--darker);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--primary), var(--neon-pink));
+            border-radius: 10px;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(6, 182, 212, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 60% 60%, rgba(236, 72, 153, 0.15) 0%, transparent 40%);
+            animation: bgRotate 30s linear infinite;
+        }
+
+        @keyframes bgRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: float 15s infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.5; }
+            100% {
+                transform: translateY(-100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 0.8rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            background: rgba(15, 15, 35, 0.9);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Circular Logo Design */
+        .logo-circle {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: conic-gradient(from 0deg, var(--primary), var(--neon-pink), var(--accent), var(--neon-green), var(--neon-orange), var(--primary));
+            padding: 3px;
+            animation: logoSpin 8s linear infinite;
+        }
+
+        @keyframes logoSpin {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        .logo-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 50%, #0f1629 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-inner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: logoShine 3s infinite;
+        }
+
+        @keyframes logoShine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .logo-hindi {
+            font-size: 1.1rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffd700, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            0% { filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.5)); }
+            100% { filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8)); }
+        }
+
+        .logo-csc {
+            font-size: 0.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 2px;
+            margin-top: 2px;
+        }
+
+        .logo-text h1 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .logo-text span {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.7);
+            font-weight: 400;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--neon-pink));
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-contact {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-phone {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 0.7rem 1.3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-phone:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.6);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            width: 28px;
+            height: 3px;
+            background: #fff;
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(7, 7, 20, 0.98);
+            backdrop-filter: blur(30px);
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .mobile-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            padding: 0.5rem 2rem;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--accent);
+            transform: scale(1.1);
+        }
+
+        /* Marquee */
+        .marquee-container {
+            margin-top: 82px;
+            overflow: hidden;
+            background: linear-gradient(90deg, var(--primary), var(--neon-pink), var(--secondary));
+            padding: 0.8rem 0;
+            position: relative;
+        }
+
+        .marquee-container::before,
+        .marquee-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 100px;
+            height: 100%;
+            z-index: 2;
+        }
+
+        .marquee-container::before {
+            left: 0;
+            background: linear-gradient(90deg, var(--primary), transparent);
+        }
+
+        .marquee-container::after {
+            right: 0;
+            background: linear-gradient(-90deg, var(--secondary), transparent);
+        }
+
+        .marquee {
+            display: flex;
+            animation: marquee 30s linear infinite;
+            white-space: nowrap;
+        }
+
+        .marquee:hover {
+            animation-play-state: paused;
+        }
+
+        .marquee span {
+            padding: 0 2rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 5% 80px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+        }
+
+        /* Large Hero Logo */
+        .hero-logo-container {
+            margin-bottom: 2.5rem;
+            animation: fadeInDown 1s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-logo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: conic-gradient(from 0deg, var(--primary), var(--neon-pink), var(--accent), var(--neon-green), var(--neon-orange), var(--neon-blue), var(--primary));
+            padding: 4px;
+            animation: heroLogoRotate 10s linear infinite;
+            box-shadow: 
+                0 0 60px rgba(99, 102, 241, 0.5),
+                0 0 120px rgba(236, 72, 153, 0.3);
+        }
+
+        @keyframes heroLogoRotate {
+            0% { 
+                transform: rotate(0deg);
+                filter: hue-rotate(0deg);
+            }
+            100% { 
+                transform: rotate(360deg);
+                filter: hue-rotate(360deg);
+            }
+        }
+
+        .hero-logo-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 50%, #0f1629 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            animation: heroLogoCounterRotate 10s linear infinite;
+        }
+
+        @keyframes heroLogoCounterRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(-360deg); }
+        }
+
+        .hero-logo-inner::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.1), transparent, rgba(255,255,255,0.05), transparent);
+            animation: innerShine 4s linear infinite;
+        }
+
+        @keyframes innerShine {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hero-logo-star {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.6);
+            letter-spacing: 3px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-logo-hindi {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffd700, #ff6b6b, #4ecdc4, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+            position: relative;
+            z-index: 1;
+            animation: heroTextPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes heroTextPulse {
+            0%, 100% { 
+                filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+            }
+            50% { 
+                filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.8));
+            }
+        }
+
+        .hero-logo-csc {
+            font-size: 1rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), var(--neon-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 5px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-logo-bottom {
+            font-size: 0.55rem;
+            color: rgba(255,255,255,0.7);
+            letter-spacing: 1px;
+            margin-top: 3px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease 0.2s both;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-badge i {
+            color: var(--neon-green);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, var(--accent), var(--neon-pink), var(--neon-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientFlow 5s ease infinite;
+            background-size: 200% auto;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+            100% { background-position: 0% center; }
+        }
+
+        .hero h1 .hindi-text {
+            display: block;
+            font-size: 0.55em;
+            color: rgba(255,255,255,0.8);
+            -webkit-text-fill-color: initial;
+            margin-top: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.7);
+            max-width: 650px;
+            margin: 0 auto 2.5rem;
+            animation: fadeInUp 0.8s ease 0.6s both;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.8s both;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--neon-pink));
+            box-shadow: 0 0 30px rgba(236, 72, 153, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(236, 72, 153, 0.6);
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            box-shadow: 0 0 30px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-whatsapp:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(37, 211, 102, 0.6);
+        }
+
+        .btn-secondary {
+            background: var(--glass);
+            border: 2px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 4rem;
+            animation: fadeInUp 0.8s ease 1s both;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            min-width: 120px;
+            transition: all 0.3s;
+        }
+
+        .stat:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), var(--neon-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Styles */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+            border: 1px solid var(--primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            color: var(--accent);
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: rgba(255,255,255,0.6);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .glow {
+            text-shadow: 0 0 20px currentColor;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 100px 5%;
+            position: relative;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--neon-pink), var(--accent));
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            transition: 0.5s;
+        }
+
+        .service-card:hover::after {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 30px 60px rgba(99, 102, 241, 0.2);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-icon.csc {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+            color: var(--primary);
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .service-icon.gov {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(245, 158, 11, 0.2));
+            color: var(--neon-pink);
+            box-shadow: 0 0 30px rgba(236, 72, 153, 0.3);
+        }
+
+        .service-icon.travel {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(99, 102, 241, 0.2));
+            color: var(--accent);
+            box-shadow: 0 0 30px rgba(6, 182, 212, 0.3);
+        }
+
+        .service-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .service-card > p {
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .service-tag {
+            background: rgba(255,255,255,0.05);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+            cursor: default;
+        }
+
+        .service-tag:hover {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Banking Section */
+        .banking-section {
+            padding: 100px 5%;
+            background: linear-gradient(180deg, transparent, rgba(16, 185, 129, 0.03), transparent);
+        }
+
+        .banking-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .banking-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+            transition: all 0.3s;
+            backdrop-filter: blur(20px);
+        }
+
+        .banking-card:hover {
+            transform: translateX(10px);
+            border-color: var(--neon-green);
+            box-shadow: 0 10px 40px rgba(16, 185, 129, 0.15);
+        }
+
+        .banking-card i {
+            font-size: 1.5rem;
+            color: var(--neon-green);
+            width: 50px;
+            height: 50px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .banking-card h4 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+
+        .banking-card p {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Payment Section */
+        .payment-section {
+            padding: 100px 5%;
+            background: linear-gradient(180deg, transparent, rgba(99, 102, 241, 0.03), transparent);
+        }
+
+        .payment-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .payment-qr-side {
+            text-align: center;
+        }
+
+        .payment-qr-side h3 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--neon-green), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .qr-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .qr-frame {
+            position: relative;
+            padding: 5px;
+            background: conic-gradient(from 0deg, var(--neon-green), var(--accent), var(--primary), var(--neon-pink), var(--neon-green));
+            border-radius: 24px;
+            animation: qrBorderRotate 4s linear infinite;
+        }
+
+        @keyframes qrBorderRotate {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        .qr-inner {
+            background: #fff;
+            padding: 20px;
+            border-radius: 20px;
+        }
+
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            border-radius: 12px;
+        }
+
+        .qr-label {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .upi-box {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            backdrop-filter: blur(20px);
+        }
+
+        .upi-id-display {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .upi-id-display i {
+            font-size: 1.5rem;
+            color: var(--neon-green);
+        }
+
+        .upi-id-display span {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent);
+            font-family: monospace;
+        }
+
+        .copy-btn {
+            background: linear-gradient(135deg, var(--neon-green), var(--accent));
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        .copy-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+        }
+
+        .payment-apps {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .payment-app {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+        }
+
+        .payment-app:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+
+        .payment-info-side h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .payment-steps {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+        }
+
+        .step {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .step:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-num {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .step:nth-child(1) .step-num {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        .step:nth-child(2) .step-num {
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-orange));
+        }
+
+        .step:nth-child(3) .step-num {
+            background: linear-gradient(135deg, var(--neon-green), var(--accent));
+        }
+
+        .step-content h4 {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .step-content p {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+
+        .security-badge {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1));
+            border: 1px solid var(--neon-green);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .security-badge i {
+            font-size: 2rem;
+            color: var(--neon-green);
+        }
+
+        .security-badge div h4 {
+            color: var(--neon-green);
+            margin-bottom: 0.3rem;
+        }
+
+        .security-badge div p {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Why Us Section */
+        .why-us {
+            padding: 100px 5%;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .why-card {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            border-radius: 24px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s;
+            backdrop-filter: blur(20px);
+        }
+
+        .why-card:hover {
+            transform: scale(1.05) translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(6, 182, 212, 0.2);
+        }
+
+        .why-card i {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--accent), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .why-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .why-card p {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 100px 5%;
+            background: linear-gradient(180deg, transparent, rgba(99, 102, 241, 0.03));
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-info h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info > p {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .contact-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            padding: 1.2rem 1.5rem;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .contact-card:hover {
+            transform: translateX(10px);
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .contact-card i {
+            font-size: 1.3rem;
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-card.whatsapp i {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+        }
+
+        .contact-card.email i {
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-orange));
+        }
+
+        .contact-card.upi i {
+            background: linear-gradient(135deg, var(--neon-green), var(--accent));
+        }
+
+        .contact-card.address i {
+            background: linear-gradient(135deg, var(--neon-orange), #ef4444);
+        }
+
+        .contact-card.time i {
+            background: linear-gradient(135deg, var(--accent), var(--neon-blue));
+        }
+
+        .contact-card-content h4 {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.2rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .contact-card-content span,
+        .contact-card-content p {
+            color: var(--accent);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .contact-card-content p {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        .social-link.whatsapp:hover {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            border-color: transparent;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+        }
+
+        .social-link.facebook:hover {
+            background: linear-gradient(135deg, #1877f2, #0a5dc2);
+            border-color: transparent;
+            box-shadow: 0 10px 30px rgba(24, 119, 242, 0.4);
+        }
+
+        .social-link.instagram:hover {
+            background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            border-color: transparent;
+            box-shadow: 0 10px 30px rgba(225, 48, 108, 0.4);
+        }
+
+        .social-link.youtube:hover {
+            background: linear-gradient(135deg, #ff0000, #cc0000);
+            border-color: transparent;
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.4);
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            backdrop-filter: blur(20px);
+        }
+
+        .contact-form h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-form > p {
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .form-group select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.5rem;
+        }
+
+        .form-group select option {
+            background: var(--dark);
+            color: #fff;
+            padding: 10px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1.1rem;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.4);
+        }
+
+        .submit-btn i {
+            font-size: 1.3rem;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(7, 7, 20, 0.95);
+            border-top: 1px solid var(--glass-border);
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.2fr;
+            gap: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-brand > p {
+            color: rgba(255,255,255,0.6);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .footer-address {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1rem;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .footer-address i {
+            color: var(--neon-pink);
+            margin-right: 8px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section ul li a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-section ul li a i {
+            font-size: 0.7rem;
+            color: var(--primary);
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+            text-align: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom p:last-child {
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        /* Floating Buttons */
+        .floating-buttons {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 999;
+        }
+
+        .float-btn {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .float-btn::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: inherit;
+            z-index: -1;
+            animation: floatPulse 2s infinite;
+        }
+
+        @keyframes floatPulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.3);
+                opacity: 0;
+            }
+        }
+
+        .whatsapp-float {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            box-shadow: 0 5px 25px rgba(37, 211, 102, 0.5);
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.15);
+            box-shadow: 0 10px 40px rgba(37, 211, 102, 0.6);
+        }
+
+        .scroll-top {
+            background: linear-gradient(135deg, var(--primary), var(--neon-pink));
+            box-shadow: 0 5px 25px rgba(99, 102, 241, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .scroll-top:hover {
+            transform: scale(1.15);
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: linear-gradient(135deg, var(--neon-green), var(--accent));
+            color: #fff;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            z-index: 10000;
+            opacity: 0;
+            transition: all 0.3s;
+            box-shadow: 0 10px 40px rgba(16, 185, 129, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .why-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .payment-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 0.6rem 5%;
+            }
+
+            .nav-links, .nav-contact {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .logo-circle {
+                width: 50px;
+                height: 50px;
+            }
+
+            .logo-hindi {
+                font-size: 0.9rem;
+            }
+
+            .logo-csc {
+                font-size: 0.4rem;
+            }
+
+            .logo-text h1 {
+                font-size: 1rem;
+            }
+
+            .logo-text span {
+                font-size: 0.65rem;
+            }
+
+            .marquee-container {
+                margin-top: 70px;
+            }
+
+            .hero {
+                padding: 80px 5% 60px;
+            }
+
+            .hero-logo {
+                width: 140px;
+                height: 140px;
+            }
+
+            .hero-logo-hindi {
+                font-size: 2rem;
+            }
+
+            .hero-logo-csc {
+                font-size: 0.8rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.9rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .hero-stats {
+                gap: 1rem;
+            }
+
+            .stat {
+                padding: 1rem;
+                min-width: 100px;
+            }
+
+            .stat-number {
+                font-size: 1.8rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .banking-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .why-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+
+            .why-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .why-card i {
+                font-size: 2rem;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .footer-section ul li a {
+                justify-content: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .floating-buttons {
+                bottom: 20px;
+                right: 20px;
+                gap: 12px;
+            }
+
+            .float-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-logo {
+                width: 120px;
+                height: 120px;
+            }
+
+            .hero-logo-hindi {
+                font-size: 1.6rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
+
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .qr-code {
+                width: 180px;
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="bg-animation"></div>
+    <div class="floating-particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <div class="logo-circle">
+                <div class="logo-inner">
+                    <span class="logo-hindi">भूमि</span>
+                    <span class="logo-csc">C S C</span>
+                </div>
+            </div>
+            <div class="logo-text">
+                <h1>BHUMI CSC</h1>
+                <span>जन सेवा केंद्र</span>
+            </div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">होम</a></li>
+            <li><a href="#services">सेवाएं</a></li>
+            <li><a href="#banking">बैंकिंग</a></li>
+            <li><a href="#payment">भुगतान</a></li>
+            <li><a href="#contact">संपर्क</a></li>
+        </ul>
+        <div class="nav-contact">
+            <a href="tel:+919795770829" class="nav-phone">
+                <i class="fas fa-phone-alt"></i>
+                +91 9795770829
+            </a>
+        </div>
+        <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#home" onclick="closeMenu()">🏠 होम</a>
+        <a href="#services" onclick="closeMenu()">📋 सेवाएं</a>
+        <a href="#banking" onclick="closeMenu()">🏦 बैंकिंग</a>
+        <a href="#payment" onclick="closeMenu()">💳 भुगतान</a>
+        <a href="#contact" onclick="closeMenu()">📞 संपर्क</a>
+        <a href="tel:+919795770829" class="btn btn-primary" onclick="closeMenu()">
+            <i class="fas fa-phone-alt"></i> कॉल करें
+        </a>
+        <a href="https://wa.me/919795770829" class="btn btn-whatsapp" onclick="closeMenu()">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+        </a>
+    </div>
+
+    <!-- Marquee -->
+    <div class="marquee-container">
+        <div class="marquee">
+            <span>🎯 CSC सेवाएं उपलब्ध</span>
+            <span>🏦 बैंकिंग सेवाएं</span>
+            <span>📄 आय, जाति, निवास प्रमाण पत्र</span>
+            <span>✈️ ट्रेन व प्लेन टिकट</span>
+            <span>💳 पैन कार्ड सेवाएं</span>
+            <span>📍 बंशीपुर मोड़, भैंसा, केराकत, जौनपुर</span>
+            <span>📞 +91 9795770829</span>
+            <span>🎯 CSC सेवाएं उपलब्ध</span>
+            <span>🏦 बैंकिंग सेवाएं</span>
+            <span>📄 आय, जाति, निवास प्रमाण पत्र</span>
+            <span>✈️ ट्रेन व प्लेन टिकट</span>
+            <span>💳 पैन कार्ड सेवाएं</span>
+            <span>📍 बंशीपुर मोड़, भैंसा, केराकत, जौनपुर</span>
+            <span>📞 +91 9795770829</span>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <!-- Hero Logo -->
+            <div class="hero-logo-container">
+                <div class="hero-logo">
+                    <div class="hero-logo-inner">
+                        <span class="hero-logo-star">★ BHUMI ★</span>
+                        <span class="hero-logo-hindi">भूमि</span>
+                        <span class="hero-logo-csc">C S C</span>
+                        <span class="hero-logo-bottom">जन सेवा केंद्र</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-badge">
+                <i class="fas fa-check-circle"></i>
+                <span>सरकार द्वारा अधिकृत सेवा केंद्र</span>
+            </div>
+
+            <h1>
+                <span class="gradient-text">भूमि CSC</span>
+                <span class="hindi-text">जन सेवा केंद्र</span>
+            </h1>
+
+            <p>आपकी सभी ऑनलाइन सेवाओं का एक मात्र विश्वसनीय केंद्र। बैंकिंग, प्रमाण पत्र, सरकारी योजनाएं - सब कुछ एक ही जगह।</p>
+
+            <div class="hero-buttons">
+                <a href="tel:+919795770829" class="btn btn-primary">
+                    <i class="fas fa-phone-alt"></i>
+                    अभी कॉल करें
+                </a>
+                <a href="https://wa.me/919795770829?text=नमस्ते! मुझे भूमि CSC की सेवाओं के बारे में जानकारी चाहिए।" class="btn btn-whatsapp" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    WhatsApp करें
+                </a>
+                <a href="#services" class="btn btn-secondary">
+                    <i class="fas fa-arrow-down"></i>
+                    सेवाएं देखें
+                </a>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">सेवाएं उपलब्ध</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">1000+</div>
+                    <div class="stat-label">खुश ग्राहक</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">सहायता</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-header">
+            <div class="section-tag">
+                <i class="fas fa-star"></i>
+                हमारी सेवाएं
+            </div>
+            <h2>भूमि CSC पर उपलब्ध <span class="glow" style="color: var(--accent);">ऑनलाइन सेवाएं</span></h2>
+            <p>सभी सरकारी और बैंकिंग सेवाएं एक ही छत के नीचे</p>
+        </div>
+
+        <div class="services-grid">
+            <!-- CSC Services -->
+            <div class="service-card reveal">
+                <div class="service-icon csc">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <h3>📋 CSC सेवाएं</h3>
+                <p>सभी प्रकार के प्रमाण पत्र, पेंशन योजनाएं और सरकारी सेवाएं उपलब्ध</p>
+                <div class="service-list">
+                    <span class="service-tag">आय प्रमाण पत्र</span>
+                    <span class="service-tag">जाति प्रमाण पत्र</span>
+                    <span class="service-tag">निवास प्रमाण पत्र</span>
+                    <span class="service-tag">वृद्धा पेंशन</span>
+                    <span class="service-tag">विधवा पेंशन</span>
+                    <span class="service-tag">विकलांग पेंशन</span>
+                    <span class="service-tag">खतौनी</span>
+                    <span class="service-tag">वरासत</span>
+                    <span class="service-tag">पीएम किसान फार्म</span>
+                </div>
+            </div>
+
+            <!-- Government Services -->
+            <div class="service-card reveal">
+                <div class="service-icon gov">
+                    <i class="fas fa-landmark"></i>
+                </div>
+                <h3>🏛️ सरकारी सेवाएं</h3>
+                <p>MSME, राशन कार्ड, आयुष्मान और अन्य सरकारी योजनाओं की सेवाएं</p>
+                <div class="service-list">
+                    <span class="service-tag">MSME आधार उद्यम रजिस्ट्रेशन</span>
+                    <span class="service-tag">राशन कार्ड</span>
+                    <span class="service-tag">आयुष्मान कार्ड</span>
+                    <span class="service-tag">लेबर कार्ड</span>
+                    <span class="service-tag">पैन कार्ड</span>
+                    <span class="service-tag">स्कॉलरशिप फार्म</span>
+                    <span class="service-tag">अन्य फॉर्म</span>
+                </div>
+            </div>
+
+            <!-- Travel & Bill Services -->
+            <div class="service-card reveal">
+                <div class="service-icon travel">
+                    <i class="fas fa-plane"></i>
+                </div>
+                <h3>✈️ ट्रैवल और बिल सेवाएं</h3>
+                <p>ट्रेन-प्लेन टिकट बुकिंग, बिल भुगतान और रिचार्ज सेवाएं</p>
+                <div class="service-list">
+                    <span class="service-tag">ट्रेन टिकट</span>
+                    <span class="service-tag">प्लेन टिकट</span>
+                    <span class="service-tag">बिजली बिल</span>
+                    <span class="service-tag">LIC प्रीमियम</span>
+                    <span class="service-tag">मोबाइल रिचार्ज</span>
+                    <span class="service-tag">DTH रिचार्ज</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Banking Section -->
+    <section class="banking-section" id="banking">
+        <div class="section-header">
+            <div class="section-tag">
+                <i class="fas fa-university"></i>
+                बैंकिंग सेवाएं
+            </div>
+            <h2>🏦 सभी <span class="glow" style="color: var(--neon-green);">बैंकिंग सेवाएं</span> उपलब्ध</h2>
+            <p>बचत खाता, RD, FD और सभी प्रकार की बैंकिंग सुविधाएं</p>
+        </div>
+
+        <div class="banking-grid">
+            <div class="banking-card reveal">
+                <i class="fas fa-piggy-bank"></i>
+                <div>
+                    <h4>बचत अकाउंट खोलना</h4>
+                    <p>नया बचत खाता खोलें आसानी से</p>
+                </div>
+            </div>
+            <div class="banking-card reveal">
+                <i class="fas fa-coins"></i>
+                <div>
+                    <h4>RD, FD अकाउंट खोलना</h4>
+                    <p>RD और FD खाता खोलने की सुविधा</p>
+                </div>
+            </div>
+            <div class="banking-card reveal">
+                <i class="fas fa-credit-card"></i>
+                <div>
+                    <h4>🏧 ATM सर्विस</h4>
+                    <p>ATM संबंधित सभी सेवाएं</p>
+                </div>
+            </div>
+            <div class="banking-card reveal">
+                <i class="fas fa-money-bill-wave"></i>
+                <div>
+                    <h4>कैश जमा निकासी</h4>
+                    <p>आधार व ATM कार्ड से कैश जमा निकासी</p>
+                </div>
+            </div>
+            <div class="banking-card reveal">
+                <i class="fas fa-id-card"></i>
+                <div>
+                    <h4>KYC व मोबाइल अपडेट</h4>
+                    <p>KYC व मोबाइल नंबर अपडेट</p>
+                </div>
+            </div>
+            <div class="banking-card reveal">
+                <i class="fas fa-link"></i>
+                <div>
+                    <h4>आधार लिंक, NPCI, DBT</h4>
+                    <p>आधार लिंक, NPCI, DBT लिंक सेवाएं</p>
+                </div>
+            </div>
+            <div class="banking-card reveal">
+                <i class="fas fa-key"></i>
+                <div>
+                    <h4>ATM कार्ड पिन जेनरेट</h4>
+                    <p>नया ATM कार्ड पिन बनाएं</p>
+                </div>
+            </div>
+            <div class="banking-card reveal">
+                <i class="fas fa-shield-alt"></i>
+                <div>
+                    <h4>APY, PMJJBY, PMSBY</h4>
+                    <p>सरकारी इंश्योरेंस योजनाएं</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Section -->
+    <section class="payment-section" id="payment">
+        <div class="section-header">
+            <div class="section-tag">
+                <i class="fas fa-qrcode"></i>
+                ऑनलाइन भुगतान
+            </div>
+            <h2>💳 <span class="glow" style="color: var(--neon-green);">UPI से भुगतान</span> करें</h2>
+            <p>QR कोड स्कैन करें या UPI ID से भुगतान करें</p>
+        </div>
+
+        <div class="payment-container">
+            <div class="payment-qr-side reveal">
+                <h3>📱 QR कोड स्कैन करें</h3>
+                <div class="qr-wrapper">
+                    <div class="qr-frame">
+                        <div class="qr-inner">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=9795770829@okbizaxis%26pn=BHUMI%20CSC%20JAN%20SEVA%20KENDRA%26cu=INR" alt="UPI QR Code" class="qr-code">
+                        </div>
+                    </div>
+                </div>
+                <p class="qr-label">किसी भी UPI ऐप से स्कैन करें</p>
+
+                <div class="upi-box">
+                    <div class="upi-id-display">
+                        <i class="fas fa-wallet"></i>
+                        <span id="upiId">9795770829@okbizaxis</span>
+                    </div>
+                    <button class="copy-btn" onclick="copyUPI()">
+                        <i class="fas fa-copy"></i>
+                        UPI ID कॉपी करें
+                    </button>
+                    <div class="payment-apps">
+                        <span class="payment-app"><i class="fab fa-google-pay" style="color: #4285F4;"></i> Google Pay</span>
+                        <span class="payment-app"><i class="fas fa-mobile-alt" style="color: #5f259f;"></i> PhonePe</span>
+                        <span class="payment-app"><i class="fas fa-wallet" style="color: #002970;"></i> Paytm</span>
+                        <span class="payment-app"><i class="fas fa-university" style="color: #ff6600;"></i> BHIM</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="payment-info-side reveal">
+                <h3>💡 भुगतान के निर्देश</h3>
+                <div class="payment-steps">
+                    <div class="step">
+                        <div class="step-num">1</div>
+                        <div class="step-content">
+                            <h4>QR कोड स्कैन करें</h4>
+                            <p>अपने UPI ऐप से QR कोड स्कैन करें</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">2</div>
+                        <div class="step-content">
+                            <h4>राशि दर्ज करें</h4>
+                            <p>भुगतान राशि और विवरण दर्ज करें</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">3</div>
+                        <div class="step-content">
+                            <h4>भुगतान पूर्ण करें</h4>
+                            <p>UPI PIN दर्ज करके भुगतान पूर्ण करें</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="security-badge">
+                    <i class="fas fa-shield-alt"></i>
+                    <div>
+                        <h4>100% सुरक्षित भुगतान</h4>
+                        <p>आपका भुगतान पूर्णतः सुरक्षित है</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us Section -->
+    <section class="why-us">
+        <div class="section-header">
+            <div class="section-tag">
+                <i class="fas fa-trophy"></i>
+                हमें क्यों चुनें
+            </div>
+            <h2>भूमि CSC की <span class="glow" style="color: var(--neon-pink);">विशेषताएं</span></h2>
+        </div>
+
+        <div class="why-grid">
+            <div class="why-card reveal">
+                <i class="fas fa-bolt"></i>
+                <h3>तेज़ सेवा</h3>
+                <p>सभी काम तुरंत और समय पर</p>
+            </div>
+            <div class="why-card reveal">
+                <i class="fas fa-rupee-sign"></i>
+                <h3>उचित शुल्क</h3>
+                <p>पारदर्शी और कम शुल्क</p>
+            </div>
+            <div class="why-card reveal">
+                <i class="fas fa-user-check"></i>
+                <h3>विश्वसनीय</h3>
+                <p>सरकार द्वारा अधिकृत केंद्र</p>
+            </div>
+            <div class="why-card reveal">
+                <i class="fas fa-headset"></i>
+                <h3>24/7 सहायता</h3>
+                <p>हमेशा आपकी मदद के लिए तैयार</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <div class="contact-info reveal">
+                <h2>📞 संपर्क करें</h2>
+                <p>किसी भी सेवा के लिए आज ही हमसे संपर्क करें। हम आपकी सेवा में हमेशा तत्पर हैं।</p>
+
+                <div class="contact-cards">
+                    <a href="tel:+919795770829" class="contact-card">
+                        <i class="fas fa-phone-alt"></i>
+                        <div class="contact-card-content">
+                            <h4>फ़ोन नंबर</h4>
+                            <span>+91 9795770829</span>
+                        </div>
+                    </a>
+
+                    <a href="https://wa.me/919795770829" class="contact-card whatsapp" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        <div class="contact-card-content">
+                            <h4>WhatsApp</h4>
+                            <span>+91 9795770829</span>
+                        </div>
+                    </a>
+
+                    <a href="mailto:bhumicsc99@gmail.com" class="contact-card email">
+                        <i class="fas fa-envelope"></i>
+                        <div class="contact-card-content">
+                            <h4>ईमेल</h4>
+                            <span>bhumicsc99@gmail.com</span>
+                        </div>
+                    </a>
+
+                    <a href="#payment" class="contact-card upi">
+                        <i class="fas fa-wallet"></i>
+                        <div class="contact-card-content">
+                            <h4>UPI ID</h4>
+                            <span>9795770829@okbizaxis</span>
+                        </div>
+                    </a>
+
+                    <div class="contact-card address">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="contact-card-content">
+                            <h4>पता</h4>
+                            <p>बंशीपुर मोड़, भैंसा, केराकत<br>जिला - जौनपुर, 222129</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-card time">
+                        <i class="fas fa-clock"></i>
+                        <div class="contact-card-content">
+                            <h4>कार्य समय</h4>
+                            <p>सोम - रवि: सुबह 9 बजे - रात 8 बजे</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://wa.me/919795770829" class="social-link whatsapp" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="#" class="social-link facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-link instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-link youtube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="contact-form reveal">
+                <h3>📝 सेवा के लिए संदेश भेजें</h3>
+                <p>आपका संदेश सीधे हमारे WhatsApp पर आएगा</p>
+
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label>आपका नाम *</label>
+                        <input type="text" id="userName" placeholder="अपना नाम लिखें" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>फ़ोन नंबर *</label>
+                        <input type="tel" id="userPhone" placeholder="अपना फ़ोन नंबर लिखें" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>सेवा चुनें *</label>
+                        <select id="serviceType" required>
+                            <option value="">-- सेवा चुनें --</option>
+                            <optgroup label="📋 CSC सेवाएं">
+                                <option value="आय प्रमाण पत्र">आय प्रमाण पत्र</option>
+                                <option value="जाति प्रमाण पत्र">जाति प्रमाण पत्र</option>
+                                <option value="निवास प्रमाण पत्र">निवास प्रमाण पत्र</option>
+                                <option value="वृद्धा पेंशन">वृद्धा पेंशन</option>
+                                <option value="विधवा पेंशन">विधवा पेंशन</option>
+                                <option value="विकलांग पेंशन">विकलांग पेंशन</option>
+                                <option value="खतौनी">खतौनी</option>
+                                <option value="वरासत">वरासत</option>
+                                <option value="पीएम किसान">पीएम किसान</option>
+                            </optgroup>
+                            <optgroup label="🏛️ सरकारी सेवाएं">
+                                <option value="MSME उद्यम रजिस्ट्रेशन">MSME उद्यम रजिस्ट्रेशन</option>
+                                <option value="राशन कार्ड">राशन कार्ड</option>
+                                <option value="आयुष्मान कार्ड">आयुष्मान कार्ड</option>
+                                <option value="लेबर कार्ड">लेबर कार्ड</option>
+                                <option value="पैन कार्ड">पैन कार्ड</option>
+                                <option value="स्कॉलरशिप फार्म">स्कॉलरशिप फार्म</option>
+                            </optgroup>
+                            <optgroup label="🏦 बैंकिंग सेवाएं">
+                                <option value="बचत खाता खोलना">बचत खाता खोलना</option>
+                                <option value="RD/FD खाता">RD/FD खाता</option>
+                                <option value="कैश जमा/निकासी">कैश जमा/निकासी</option>
+                                <option value="KYC अपडेट">KYC अपडेट</option>
+                                <option value="आधार लिंक">आधार लिंक</option>
+                                <option value="ATM पिन जेनरेट">ATM पिन जेनरेट</option>
+                            </optgroup>
+                            <optgroup label="✈️ अन्य सेवाएं">
+                                <option value="ट्रेन टिकट">ट्रेन टिकट</option>
+                                <option value="प्लेन टिकट">प्लेन टिकट</option>
+                                <option value="बिजली बिल">बिजली बिल</option>
+                                <option value="मोबाइल रिचार्ज">मोबाइल रिचार्ज</option>
+                                <option value="अन्य">अन्य</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>संदेश (वैकल्पिक)</label>
+                        <textarea id="userMessage" placeholder="अपना संदेश लिखें..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <i class="fab fa-whatsapp"></i>
+                        WhatsApp पर भेजें
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>भूमि CSC जन सेवा केंद्र</h3>
+                <p>आपकी सभी ऑनलाइन सेवाओं का विश्वसनीय केंद्र। बैंकिंग, प्रमाण पत्र, सरकारी योजनाएं - सब कुछ एक ही जगह पर।</p>
+                <div class="footer-address">
+                    <i class="fas fa-map-marker-alt"></i>
+                    बंशीपुर मोड़, भैंसा, केराकत<br>
+                    जिला - जौनपुर, उत्तर प्रदेश - 222129
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h4>CSC सेवाएं</h4>
+                <ul>
+                    <li><a href="#services"><i class="fas fa-chevron-right"></i> आय प्रमाण पत्र</a></li>
+                    <li><a href="#services"><i class="fas fa-chevron-right"></i> जाति प्रमाण पत्र</a></li>
+                    <li><a href="#services"><i class="fas fa-chevron-right"></i> निवास प्रमाण पत्र</a></li>
+                    <li><a href="#services"><i class="fas fa-chevron-right"></i> पेंशन योजनाएं</a></li>
+                    <li><a href="#services"><i class="fas fa-chevron-right"></i> पीएम किसान</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>बैंकिंग सेवाएं</h4>
+                <ul>
+                    <li><a href="#banking"><i class="fas fa-chevron-right"></i> बचत खाता</a></li>
+                    <li><a href="#banking"><i class="fas fa-chevron-right"></i> RD/FD खाता</a></li>
+                    <li><a href="#banking"><i class="fas fa-chevron-right"></i> कैश जमा/निकासी</a></li>
+                    <li><a href="#banking"><i class="fas fa-chevron-right"></i> KYC अपडेट</a></li>
+                    <li><a href="#banking"><i class="fas fa-chevron-right"></i> आधार लिंक</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>संपर्क करें</h4>
+                <ul>
+                    <li><a href="tel:+919795770829"><i class="fas fa-phone"></i> +91 9795770829</a></li>
+                    <li><a href="https://wa.me/919795770829"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+                    <li><a href="mailto:bhumicsc99@gmail.com"><i class="fas fa-envelope"></i> bhumicsc99@gmail.com</a></li>
+                    <li><a href="#payment"><i class="fas fa-wallet"></i> 9795770829@okbizaxis</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 भूमि CSC जन सेवा केंद्र | All Rights Reserved</p>
+            <p>Made with ❤️ for Digital India | बंशीपुर मोड़, भैंसा, केराकत, जौनपुर - 222129</p>
+        </div>
+    </footer>
+
+    <!-- Floating Buttons -->
+    <div class="floating-buttons">
+        <a href="https://wa.me/919795770829?text=नमस्ते! मुझे भूमि CSC की सेवाओं के बारे में जानकारी चाहिए।" class="float-btn whatsapp-float" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="#home" class="float-btn scroll-top" id="scrollTop">
+            <i class="fas fa-arrow-up"></i>
+        </a>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">UPI ID कॉपी हो गई!</span>
+    </div>
+
+    <script>
+        // Create floating particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 40; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (12 + Math.random() * 10) + 's';
+            particle.style.background = ['var(--accent)', 'var(--primary)', 'var(--neon-pink)', 'var(--neon-green)'][Math.floor(Math.random() * 4)];
+            particlesContainer.appendChild(particle);
+        }
+
+        // Scroll reveal animation
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach((element, index) => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const revealPoint = 150;
+
+                if (elementTop < windowHeight - revealPoint) {
+                    setTimeout(() => {
+                        element.classList.add('active');
+                    }, index * 100);
+                }
+            });
+        }
+
+        // Scroll to top button visibility
+        function toggleScrollTopButton() {
+            const scrollTop = document.getElementById('scrollTop');
+            if (window.scrollY > 500) {
+                scrollTop.classList.add('visible');
+            } else {
+                scrollTop.classList.remove('visible');
+            }
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile menu
+        function toggleMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuToggle = document.getElementById('menuToggle');
+            mobileMenu.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuToggle = document.getElementById('menuToggle');
+            mobileMenu.classList.remove('active');
+            menuToggle.classList.remove('active');
+        }
+
+        // Copy UPI ID
+        function copyUPI() {
+            const upiId = document.getElementById('upiId').textContent;
+            navigator.clipboard.writeText(upiId).then(() => {
+                showToast('UPI ID कॉपी हो गई!');
+            }).catch(() => {
+                const textArea = document.createElement('textarea');
+                textArea.value = upiId;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showToast('UPI ID कॉपी हो गई!');
+            });
+        }
+
+        // Show toast
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Form submission to WhatsApp
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('userName').value.trim();
+            const phone = document.getElementById('userPhone').value.trim();
+            const service = document.getElementById('serviceType').value;
+            const message = document.getElementById('userMessage').value.trim();
+
+            // Create WhatsApp message
+            let whatsappMessage = `🙏 *नमस्ते! भूमि CSC जन सेवा केंद्र*\n\n`;
+            whatsappMessage += `📋 *नई सेवा अनुरोध*\n`;
+            whatsappMessage += `━━━━━━━━━━━━━━━━━━━━━\n\n`;
+            whatsappMessage += `👤 *नाम:* ${name}\n`;
+            whatsappMessage += `📞 *फ़ोन:* ${phone}\n`;
+            whatsappMessage += `🎯 *सेवा:* ${service}\n`;
+            if (message) {
+                whatsappMessage += `💬 *संदेश:* ${message}\n`;
+            }
+            whatsappMessage += `\n━━━━━━━━━━━━━━━━━━━━━\n`;
+            whatsappMessage += `📍 *भूमि CSC जन सेवा केंद्र*\n`;
+            whatsappMessage += `बंशीपुर मोड़, भैंसा, केराकत, जौनपुर - 222129`;
+
+            // Encode message for URL
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            
+            // Open WhatsApp
+            window.open(`https://wa.me/919795770829?text=${encodedMessage}`, '_blank');
+
+            // Reset form
+            this.reset();
+            showToast('WhatsApp खुल रहा है...');
+        });
+
+        // Event listeners
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('scroll', toggleScrollTopButton);
+        window.addEventListener('load', revealOnScroll);
+
+        // Parallax effect
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero-content');
+            if (hero && scrolled < 700) {
+                hero.style.transform = `translateY(${scrolled * 0.2}px)`;
+                hero.style.opacity = 1 - scrolled / 800;
+            }
+        });
+
+        // Close menu on outside click
+        document.addEventListener('click', function(e) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuToggle = document.getElementById('menuToggle');
+            if (mobileMenu.classList.contains('active') && 
+                !mobileMenu.contains(e.target) && 
+                !menuToggle.contains(e.target)) {
+                closeMenu();
+            }
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(7, 7, 20, 0.98)';
+                nav.style.boxShadow = '0 10px 30px rgba(0,0,0,0.3)';
+            } else {
+                nav.style.background = 'rgba(15, 15, 35, 0.9)';
+                nav.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
